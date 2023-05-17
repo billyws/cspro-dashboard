@@ -1,8 +1,15 @@
 import React from 'react'
+import Image from 'next/image'
+import DashboardLayout from './layout';
 
-function Dashboard() {
+
+function Dashboard({ children }: {
+  children: React.ReactNode;}) {
   return (
-    <div>This is the Dashboard</div>
+    <div>
+      <DashboardLayout/>
+      
+    </div>
   )
 }
 

@@ -8,7 +8,6 @@ export default function Login(){
         <div>
             <div
             className="flex flex-col items-center justify-between p-24"
-            style={{ height: '100vh' }}
             >
                 <Head>
                     <title>CSPro Dashboard</title>
