@@ -1,4 +1,3 @@
-// Generate 10 Dummy post data
 const data = [
     {
         id: 1,
@@ -52,17 +51,18 @@ const data = [
     },
 ]
 
-// @URL Path /api/content
+// @URL     /api/content
 // @method  GET
 // @desc    Get all posts
 // @access  Public
+// @return  JSON
 
-// Return the data as json using nextResponse
 
 import {NextResponse} from "next/server"
 
-export function GET(req,res){
-    return new NextResponse(data)
+
+export function GET(){
+    return NextResponse.json(data)
     }
 
 
