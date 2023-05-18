@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,191 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model cspro_apps {
+  id            Int       @id @default(autoincrement())
+  name          String    @unique(map: "name") @db.VarChar(128)
+  description   String    @db.VarChar(512)
+  build_time    DateTime  @db.DateTime(0)
+  path          String    @db.VarChar(255)
+  version       String    @db.VarChar(16)
+  files         String    @db.Text
+  signature     String    @db.Char(32)
+  modified_time DateTime  @default(now()) @db.Timestamp(0)
+  created_time  DateTime? @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+}
+
+model cspro_config {
+  name          String    @id @db.VarChar(128)
+  value         String?   @db.VarChar(255)
+  modified_time DateTime  @default(now()) @db.Timestamp(0)
+  created_time  DateTime? @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+}
+
+model cspro_dictionaries {
+  id                                Int                                 @id @default(autoincrement()) @db.UnsignedSmallInt
+  dictionary_name                   String                              @unique(map: "dictionary_name")
+  dictionary_label                  String                              @db.VarChar(255)
+  dictionary_full_content           String                              @db.LongText
+  modified_time                     DateTime                            @default(now()) @db.Timestamp(0)
+  created_time                      DateTime?                           @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_dictionaries_schema         cspro_dictionaries_schema?
+  cspro_role_dictionary_permissions cspro_role_dictionary_permissions[] @ignore
+  cspro_sync_history                cspro_sync_history[]
+}
+
+model cspro_dictionaries_schema {
+  dictionary_id      Int                @id @db.UnsignedSmallInt
+  host_name          String
+  schema_name        String             @unique(map: "schema_name")
+  schema_user_name   String             @db.VarChar(255)
+  schema_password    Bytes              @db.VarBinary(255)
+  map_info           String?            @db.Text
+  modified_time      DateTime           @default(now()) @db.Timestamp(0)
+  created_time       DateTime?          @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_dictionaries cspro_dictionaries @relation(fields: [dictionary_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "schema_dict_id_constraint")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model cspro_permissions {
+  id                                Int                                 @id @default(autoincrement()) @db.UnsignedInt
+  name                              String                              @db.VarChar(255)
+  modified_time                     DateTime                            @default(now()) @db.Timestamp(0)
+  created_time                      DateTime?                           @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_role_dictionary_permissions cspro_role_dictionary_permissions[] @ignore
+  cspro_role_permissions            cspro_role_permissions[]            @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model cspro_role_dictionary_permissions {
+  role_id            Int                @db.UnsignedInt
+  dictionary_id      Int                @db.UnsignedSmallInt
+  permission_id      Int                @db.UnsignedInt
+  modified_time      DateTime           @default(now()) @db.Timestamp(0)
+  created_time       DateTime?          @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_dictionaries cspro_dictionaries @relation(fields: [dictionary_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_dictionary_id_constraint")
+  cspro_permissions  cspro_permissions  @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_dictionary_permission_id_constraint")
+  cspro_roles        cspro_roles        @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_dictionary_role_id_constraint")
+
+  @@index([dictionary_id], map: "cspro_role_dictionary_id_constraint")
+  @@index([permission_id], map: "cspro_role_dictionary_permission_id_constraint")
+  @@index([role_id], map: "cspro_role_dictionary_role_id_constraint")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model cspro_role_permissions {
+  role_id           Int               @db.UnsignedInt
+  permission_id     Int               @db.UnsignedInt
+  modified_time     DateTime          @default(now()) @db.Timestamp(0)
+  created_time      DateTime?         @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_permissions cspro_permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_permission_id_constraint")
+  cspro_roles       cspro_roles       @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_id_constraint")
+
+  @@index([permission_id], map: "cspro_permission_id_constraint")
+  @@index([role_id], map: "cspro_role_id_constraint")
+  @@ignore
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model cspro_roles {
+  id                                Int                                 @id @default(autoincrement()) @db.UnsignedInt
+  name                              String                              @unique(map: "rolename_unique")
+  modified_time                     DateTime                            @default(now()) @db.Timestamp(0)
+  created_time                      DateTime?                           @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_role_dictionary_permissions cspro_role_dictionary_permissions[] @ignore
+  cspro_role_permissions            cspro_role_permissions[]            @ignore
+  cspro_users                       cspro_users[]
+}
+
+model cspro_sync_history {
+  revision           Int                          @id @default(autoincrement()) @db.UnsignedInt
+  username           String?                      @db.VarChar(128)
+  device             String                       @db.Char(32)
+  dictionary_id      Int                          @db.UnsignedSmallInt
+  universe           String?                      @db.VarChar(255)
+  direction          cspro_sync_history_direction
+  created_time       DateTime                     @default(now()) @db.Timestamp(0)
+  cspro_dictionaries cspro_dictionaries           @relation(fields: [dictionary_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cspro_dict_id_constraint")
+
+  @@index([dictionary_id], map: "dictionary_id")
+}
+
+model cspro_users {
+  username      String      @id @db.VarChar(128)
+  password      String?     @db.VarChar(2000)
+  first_name    String?     @db.VarChar(255)
+  last_name     String?     @db.VarChar(255)
+  email         String?     @db.VarChar(255)
+  phone         String?     @db.VarChar(32)
+  role          Int         @db.UnsignedInt
+  modified_time DateTime    @default(now()) @db.Timestamp(0)
+  created_time  DateTime?   @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
+  cspro_roles   cspro_roles @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "role_id_constraint")
+
+  @@index([role], map: "role")
+}
+
+model oauth_access_tokens {
+  access_token String   @id @db.VarChar(40)
+  client_id    String   @db.VarChar(80)
+  user_id      String?  @db.VarChar(255)
+  expires      DateTime @default(now()) @db.Timestamp(0)
+  scope        String?  @db.VarChar(2000)
+}
+
+model oauth_authorization_codes {
+  authorization_code String   @id @db.VarChar(40)
+  client_id          String   @db.VarChar(80)
+  user_id            String?  @db.VarChar(255)
+  redirect_uri       String?  @db.VarChar(2000)
+  expires            DateTime @default(now()) @db.Timestamp(0)
+  scope              String?  @db.VarChar(2000)
+}
+
+model oauth_clients {
+  client_id     String  @id @db.VarChar(80)
+  client_secret String? @db.VarChar(80)
+  redirect_uri  String  @db.VarChar(2000)
+  grant_types   String? @db.VarChar(80)
+  scope         String? @db.VarChar(100)
+  user_id       String? @db.VarChar(80)
+}
+
+model oauth_jwt {
+  client_id  String  @id @db.VarChar(80)
+  subject    String? @db.VarChar(80)
+  public_key String? @db.VarChar(2000)
+}
+
+model oauth_refresh_tokens {
+  refresh_token String   @id @db.VarChar(40)
+  client_id     String   @db.VarChar(80)
+  user_id       String?  @db.VarChar(255)
+  expires       DateTime @default(now()) @db.Timestamp(0)
+  scope         String?  @db.VarChar(2000)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model oauth_scopes {
+  scope      String?  @db.Text
+  is_default Boolean?
+
+  @@ignore
+}
+
+model oauth_users {
+  username   String  @id @db.VarChar(128)
+  password   String? @db.VarChar(2000)
+  first_name String? @db.VarChar(255)
+  last_name  String? @db.VarChar(255)
+}
+
+enum cspro_sync_history_direction {
+  put
+  get
+  both
 }

@@ -16,12 +16,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <TopNav/>
         <div className='flex flex-row'>
-        <SideNav/>
-        {children}
-
+          <SideNav/>
+          {children}
         </div>
-        
-        </body>
+      </body>
     </html>
   )
 }
