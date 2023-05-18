@@ -3,14 +3,12 @@ import Image from 'next/image'
 import DashboardLayout from './layout';
 
 
-function Dashboard({ children }: {
+export default function Dashboard({ children }: {
   children: React.ReactNode;}) {
   return (
     <div>
-      <DashboardLayout/>
+      This the content
       
     </div>
   )
 }
-
-export default Dashboard
