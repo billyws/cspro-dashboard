@@ -11,9 +11,8 @@ git clone https://github.com/billyws/cspro-dashboard.git
 ```
 npm install
 npm run dev
-
 ```
-
+Go to http://localhost:3000
 
 ## Deployed on Vercel
 A development version of this app is deployed directly to Vercel - https://cspro-dashboard.vercel.app
