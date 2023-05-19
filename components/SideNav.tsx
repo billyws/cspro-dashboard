@@ -18,22 +18,22 @@ export default function SideNav(){
             <div className="flex flex-col justify-between flex-1 mt-6">
                 <nav>
                     <Link 
-                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-200" 
+                        className="flex items-center px-4 py-2 text-gray-70 rounded-md dark:bg-gray-800 dark:text-gray-200" 
                         href="/">
                         Dashboard
                     </Link>
                     <Link 
-                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-200" 
+                        className="flex items-center px-4 py-2 text-gray-700 rounded-md dark:bg-gray-800 dark:text-gray-200" 
                         href="/">
                         Coverage
                     </Link>
                     <Link 
-                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-200" 
+                        className="flex items-center px-4 py-2 text-gray-700 rounded-md dark:bg-gray-800 dark:text-gray-200" 
                         href="/">
                         Devices
                     </Link>
                     <Link 
-                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-200" 
+                        className="flex items-center px-4 py-2 text-gray-700 rounded-md dark:bg-gray-800 dark:text-gray-200" 
                         href="/">
                         Quick stats
                     </Link>
