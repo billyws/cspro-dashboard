@@ -1,16 +1,16 @@
 import React from "react"
 import Link from "next/link"
-import { PrismaClient } from "@prisma/client"
+// import { PrismaClient } from "@prisma/client"
 
 
 
 export default async function Home() {
 
-  const prisma =  new PrismaClient()
+  // const prisma =  new PrismaClient()
 
-  // Get household records from database
-  const populationData = await prisma.population_record.findMany()
-  const listingData = await prisma.listing_record.findMany()
+  // // Get household records from database
+  // const populationData = await prisma.population_record.findMany()
+  // const listingData = await prisma.listing_record.findMany()
   
 
   return (
