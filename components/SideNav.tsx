@@ -7,7 +7,7 @@ export default function SideNav(){
         <div className="nsomenu bg-base-100 w-2/12 h-screen">
             <div className="m-10">
                 <h1 className="text-xl font-bold">
-                    CSPro Dashboard
+                    Census Field Monitor
                 </h1>
             </div>
             <ul >
