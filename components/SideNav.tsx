@@ -4,18 +4,17 @@ import Link from "next/link"
 
 export default function SideNav(){
     return (
-        <div className="nsomenu bg-slate-100 w-80 h-screen">
-            <div className="my-10 px-10">
+        <div className="nsomenu w-80 h-screen">
+            <div className="mt-10 mb-5 px-10">
                 <h1 className="text-xl font-bold">
                     2024 Census - PG
                 </h1>
                 <p className="text-sm font-light text-gray-500">CSEntry Client - CAPI</p>
             </div>
 
-
                 <ul>
                     <li>
-                        <Link href={"/"} className="pl-5">
+                        <Link href={"/"} className="pl-10">
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 viewBox="0 0 24 24" 
@@ -27,7 +26,7 @@ export default function SideNav(){
                         </Link>
                     </li>
                     <li>
-                        <Link href={"/interviews"} className="pl-5"> 
+                        <Link href={"/interviews"} className="pl-10"> 
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 viewBox="0 0 24 24" 
@@ -39,7 +38,7 @@ export default function SideNav(){
                         </Link>
                     </li>
                     <li>
-                        <Link href={"/devices"} className="pl-5" >
+                        <Link href={"/devices"} className="pl-10" >
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 viewBox="0 0 24 24" 
@@ -52,7 +51,7 @@ export default function SideNav(){
                             </Link>
                     </li>
                     <li>
-                        <Link href={"/reports"} className="pl-5">
+                        <Link href={"/reports"} className="pl-10">
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 viewBox="0 0 24 24" 

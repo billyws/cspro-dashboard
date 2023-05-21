@@ -1,25 +1,28 @@
 export default function StatsCounter(){
     return (
-        <div className="nsostats nsostats-vertical mb-10 lg:nsostats-horizontal shadow">
-  
-            <div className="nsostat">
-                <div className="nsostat-title">Population count</div>
-                <div className="nsostat-value">31,256</div>
-                <div className="nsostat-desc">March 20th</div>
+        <div>
+            <div className="grid grid-cols-4 gap-4">
+                <div className="p-5 bg-slate-50 mb-10 rounded">
+                    <h1 className="text-3xl font-bold text-gray-950">25,332</h1>
+                    <h4 className="text-normal text-gray-600">Household coverage</h4>
+                    <span className="text-sm text-gray-400">Up by 5%</span>
+                </div>
+                <div className="p-5 bg-slate-50 mb-10 rounded">
+                    <h1 className="text-3xl font-bold text-gray-950">5,322</h1>
+                    <h4 className="text-normal text-gray-600">Census Units</h4>
+                    <span className="text-sm text-gray-400">Up by 30%</span>
+                </div>
+                <div className="p-5 bg-slate-50 mb-10 rounded">
+                    <h1 className="text-3xl font-bold text-gray-950">192</h1>
+                    <h4 className="text-normal text-gray-600">Reject Interviews</h4>
+                    <span className="text-sm text-gray-400">Down by 90%</span>
+                </div>
+                <div className="p-5 bg-slate-50 mb-10 rounded">
+                    <h1 className="text-3xl font-bold text-gray-950">834</h1>
+                    <h4 className="text-normal text-gray-600">Average interviews</h4>
+                    <span className="text-sm text-gray-400">Down by 4%</span>
+                </div>
             </div>
-            
-            <div className="nsostat">
-                <div className="nsostat-title">Interviews by day</div>
-                <div className="nsostat-value">4,200</div>
-                <div className="nsostat-desc">↗︎ 400 (22%)</div>
-            </div>
-            
-            <div className="nsostat">
-                <div className="nsostat-title">CUs covered</div>
-                <div className="nsostat-value">1,200</div>
-                <div className="nsostat-desc">↘︎ 90 (14%)</div>
-            </div>
-  
-</div>
+        </div>
     )
 }

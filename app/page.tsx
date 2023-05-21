@@ -1,5 +1,6 @@
 import React from "react"
 import Image from "next/image"
+import Link from "next/link"
 import StatsCounter from "../components/StatsCounter"
 import SummaryTable from "../components/SummaryTable"
 // import { PrismaClient } from "@prisma/client"
@@ -34,7 +35,7 @@ export default async function Home() {
         </div>
 
       <div className="nsodivider"></div>
-
+      
       <StatsCounter />
       <SummaryTable />
   </div>
