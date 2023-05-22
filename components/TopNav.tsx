@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function TopNav(){
     return (
-        <div className="flex flex-col-2 bg-white w-full h-18  justify-between border-b-2 border-gray-400">
+        <div className="flex flex-col-2 bg-slate-100 w-full h-18  justify-between border-b-1 border-blue-400">
             <div className="flex flex-row pt-5 pl-10">
                 <h3 className="text-base font-bold text-blue-950">2024 Census Monitoring <span className="text-sm font-normal"> | Papua New Guinea</span></h3>
             </div>

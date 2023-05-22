@@ -1,15 +1,7 @@
-'use client'
 
-import { useState, useEffect } from "react";
-import ReactApexChart from "react-apexcharts"
-import 'apexcharts/dist/apexcharts.css';
+
 
 export default function DailyProgress(){
-    const [chartLoaded, setChartLoaded] = useState(false);
-
-    useEffect(() => {
-        import("apexcharts").then(() => setChartLoaded(true));
-    }, []);
 
     const chartData = {
     series: [
@@ -70,13 +62,7 @@ export default function DailyProgress(){
                         <h4 className="text-xs font-light text-green-700">Performance</h4>
                     </div>
                     <div>
-                        {/* Insert chartData here */}
-                        <ReactApexChart
-                            options={chartData.options}
-                            series={chartData.series}
-                            type="area"
-                            height={350}
-                        />
+                    Insert charts here
                         
                     </div>
                 </div>
@@ -86,12 +72,7 @@ export default function DailyProgress(){
                         <h4 className="text-xs font-light text-green-700">Synchronizations</h4>
                     </div>
                     <div>
-                    <ReactApexChart
-                            options={chartData.options}
-                            series={chartData.series}
-                            type="area"
-                            height={350}
-                        />
+                   Insert charts here
                     </div>
                 </div>
                 <div className="p-5 my-5 rounded shadow-sm bg-slate-50">
@@ -101,12 +82,7 @@ export default function DailyProgress(){
                     </div>
                     <div>
                          <div>
-                         <ReactApexChart
-                            options={chartData.options}
-                            series={chartData.series}
-                            type="area"
-                            height={350}
-                        />
+                         Insert charts here
                          </div>
                     </div>
                 </div>
