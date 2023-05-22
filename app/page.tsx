@@ -4,6 +4,7 @@ import Link from "next/link"
 import StatsCounter from "../components/StatsCounter"
 import SummaryTable from "../components/SummaryTable"
 import DailyProgress from "../components/DailyProgress"
+import TopNav from "../components/TopNav"
 // import { PrismaClient } from "@prisma/client"
 
 
@@ -28,11 +29,7 @@ export default async function Home() {
             </p>
             </div>
 
-            <div className="flex avatar online">
-                <div className="rounded-full">
-                    <Image src="/images/bsomers_picofme02.png" alt="avatar" width={50} height={50} />
-                </div>
-            </div>
+            
         </div>
 
       <div className="nsodivider"></div>

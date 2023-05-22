@@ -4,16 +4,13 @@ import Link from "next/link"
 
 export default function SideNav(){
     return (
-        <div className="nsomenu w-80 h-screen">
-            <div className="mt-10 mb-5 px-10">
-                <h1 className="text-xl font-bold">
-                    2024 Census - PG
-                </h1>
-                <p className="text-sm font-light text-gray-500">CSEntry Client - CAPI</p>
+        <div className="nsomenu w-80 bg-gray-50 h-screen">
+            <div className="pl-10 py-5 bg-amber-400 font-light text-blue-950">
+                Welcome Billy Somers
             </div>
-
-                <ul>
-                    <li>
+            <div className="flex flex-row pt-2">
+                <ul className="w-full">
+                    <li className="hover:text-blue-950">
                         <Link href={"/"} className="pl-10">
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
@@ -64,6 +61,7 @@ export default function SideNav(){
                     </li>
                 
                 </ul>
+                </div>
 
         </div>
         )

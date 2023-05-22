@@ -1,4 +1,5 @@
 import SideNav from '../components/SideNav'
+import TopNav from '../components/TopNav'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <TopNav/>
         <div className='flex flex-row'>
           <SideNav/>
           <div className="container px-10">
