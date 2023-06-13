@@ -5,17 +5,23 @@ import StatsCounter from "../components/StatsCounter"
 import SummaryTable from "../components/SummaryTable"
 import DailyProgress from "../components/DailyProgress"
 import TopNav from "../components/TopNav"
-// import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 
+
+
+// Todo 
+// 1. Create a connection to the database to retrieve administrative indicators
+// 2. Population the page with the data and store in a state.
+// 3. Pass the data as props to children.
 
 
 export default async function Home() {
 
-  // const prisma =  new PrismaClient()
+  //const prisma =  new PrismaClient()
 
   // // Get household records from database
-  // const populationData = await prisma.population_record.findMany()
-  // const listingData = await prisma.listing_record.findMany()
+  //const populationData = await prisma.population_record.findMany()
+  //const listingData = await prisma.listing_record.findMany()
   
 
   return (
@@ -28,8 +34,6 @@ export default async function Home() {
                 Any reliance is at your own risk.
             </p>
             </div>
-
-            
         </div>
 
       <div className="nsodivider"></div>
@@ -37,7 +41,8 @@ export default async function Home() {
       <StatsCounter />
       <DailyProgress/>
       <SummaryTable />
-
+      
+      
   </div>
 
   )
