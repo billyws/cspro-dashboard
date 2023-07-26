@@ -20,7 +20,7 @@ export default function StatsCounter(){
                     <div className="flex flex-col-2 justify-between">
                         <div>
                             <div>
-                                <h1 className="text-3xl font-bold text-gray-950">{stats.length * 3.5}</h1>
+                                <h1 className="text-3xl font-bold text-gray-950">{stats.length * 3.52}</h1>
                                 <h4 className="text-normal text-gray-600">Household Coverage</h4>
                                 <span className="text-xs text-green-600">up on {Date.now()}</span>
                             </div>
