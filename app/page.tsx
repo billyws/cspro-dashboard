@@ -1,4 +1,4 @@
-import React from "react"
+
 import Image from "next/image"
 import Link from "next/link"
 import StatsCounter from "../components/StatsCounter"
@@ -15,14 +15,12 @@ import { PrismaClient } from "@prisma/client"
 // 3. Pass the data as props to children.
 
 
-export default async function Home() {
+export async function Home() {
 
-  //const prisma =  new PrismaClient()
-
-  // // Get household records from database
-  //const populationData = await prisma.population_record.findMany()
-  //const listingData = await prisma.listing_record.findMany()
+  const prisma = new PrismaClient()
   
+  // Get cases from db
+
 
   return (
     <div>
@@ -37,13 +35,13 @@ export default async function Home() {
         </div>
 
       <div className="nsodivider"></div>
-      
       <StatsCounter />
       <DailyProgress/>
       <SummaryTable />
-      
-      
+
   </div>
 
   )
 }
+
+export default Home

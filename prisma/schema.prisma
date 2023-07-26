@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -24,50 +24,6 @@ model cases {
   partial_save_subitem_occurrence Int?
 
   @@index([deleted], map: "IDX_1C1B038BFFC39EEE")
-}
-
-model cspro_apps {
-  id            Int       @id @default(autoincrement())
-  name          String    @unique(map: "name") @db.VarChar(128)
-  description   String    @db.VarChar(512)
-  build_time    DateTime  @db.DateTime(0)
-  path          String    @db.VarChar(255)
-  version       String    @db.VarChar(16)
-  files         String    @db.Text
-  signature     String    @db.Char(32)
-  modified_time DateTime  @default(now()) @db.Timestamp(0)
-  created_time  DateTime? @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-}
-
-model cspro_config {
-  name          String    @id @db.VarChar(128)
-  value         String?   @db.VarChar(255)
-  modified_time DateTime  @default(now()) @db.Timestamp(0)
-  created_time  DateTime? @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-}
-
-model cspro_dictionaries {
-  id                                Int                                 @id @default(autoincrement()) @db.UnsignedSmallInt
-  dictionary_name                   String                              @unique(map: "dictionary_name")
-  dictionary_label                  String                              @db.VarChar(255)
-  dictionary_full_content           String                              @db.LongText
-  modified_time                     DateTime                            @default(now()) @db.Timestamp(0)
-  created_time                      DateTime?                           @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_dictionaries_schema         cspro_dictionaries_schema?
-  cspro_role_dictionary_permissions cspro_role_dictionary_permissions[] @ignore
-  cspro_sync_history                cspro_sync_history[]
-}
-
-model cspro_dictionaries_schema {
-  dictionary_id      Int                @id @db.UnsignedSmallInt
-  host_name          String
-  schema_name        String             @unique(map: "schema_name")
-  schema_user_name   String             @db.VarChar(255)
-  schema_password    Bytes              @db.VarBinary(255)
-  map_info           String?            @db.Text
-  modified_time      DateTime           @default(now()) @db.Timestamp(0)
-  created_time       DateTime?          @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_dictionaries cspro_dictionaries @relation(fields: [dictionary_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "schema_dict_id_constraint")
 }
 
 model cspro_jobs {
@@ -92,88 +48,6 @@ model cspro_meta {
   modified_time        DateTime? @default(now()) @db.Timestamp(0)
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model cspro_permissions {
-  id                                Int                                 @id @default(autoincrement()) @db.UnsignedInt
-  name                              String                              @db.VarChar(255)
-  modified_time                     DateTime                            @default(now()) @db.Timestamp(0)
-  created_time                      DateTime?                           @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_role_dictionary_permissions cspro_role_dictionary_permissions[] @ignore
-  cspro_role_permissions            cspro_role_permissions[]            @ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model cspro_role_dictionary_permissions {
-  role_id            Int                @db.UnsignedInt
-  dictionary_id      Int                @db.UnsignedSmallInt
-  permission_id      Int                @db.UnsignedInt
-  modified_time      DateTime           @default(now()) @db.Timestamp(0)
-  created_time       DateTime?          @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_dictionaries cspro_dictionaries @relation(fields: [dictionary_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_dictionary_id_constraint")
-  cspro_permissions  cspro_permissions  @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_dictionary_permission_id_constraint")
-  cspro_roles        cspro_roles        @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_dictionary_role_id_constraint")
-
-  @@index([dictionary_id], map: "cspro_role_dictionary_id_constraint")
-  @@index([permission_id], map: "cspro_role_dictionary_permission_id_constraint")
-  @@index([role_id], map: "cspro_role_dictionary_role_id_constraint")
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model cspro_role_permissions {
-  role_id           Int               @db.UnsignedInt
-  permission_id     Int               @db.UnsignedInt
-  modified_time     DateTime          @default(now()) @db.Timestamp(0)
-  created_time      DateTime?         @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_permissions cspro_permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_permission_id_constraint")
-  cspro_roles       cspro_roles       @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cspro_role_id_constraint")
-
-  @@index([permission_id], map: "cspro_permission_id_constraint")
-  @@index([role_id], map: "cspro_role_id_constraint")
-  @@ignore
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model cspro_roles {
-  id                                Int                                 @id @default(autoincrement()) @db.UnsignedInt
-  name                              String                              @unique(map: "rolename_unique")
-  modified_time                     DateTime                            @default(now()) @db.Timestamp(0)
-  created_time                      DateTime?                           @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_role_dictionary_permissions cspro_role_dictionary_permissions[] @ignore
-  cspro_role_permissions            cspro_role_permissions[]            @ignore
-  cspro_users                       cspro_users[]
-}
-
-model cspro_sync_history {
-  revision           Int                          @id @default(autoincrement()) @db.UnsignedInt
-  username           String?                      @db.VarChar(128)
-  device             String                       @db.Char(32)
-  dictionary_id      Int                          @db.UnsignedSmallInt
-  universe           String?                      @db.VarChar(255)
-  direction          cspro_sync_history_direction
-  created_time       DateTime                     @default(now()) @db.Timestamp(0)
-  cspro_dictionaries cspro_dictionaries           @relation(fields: [dictionary_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cspro_dict_id_constraint")
-
-  @@index([dictionary_id], map: "dictionary_id")
-}
-
-model cspro_users {
-  username      String      @id @db.VarChar(128)
-  password      String?     @db.VarChar(2000)
-  first_name    String?     @db.VarChar(255)
-  last_name     String?     @db.VarChar(255)
-  email         String?     @db.VarChar(255)
-  phone         String?     @db.VarChar(32)
-  role          Int         @db.UnsignedInt
-  modified_time DateTime    @default(now()) @db.Timestamp(0)
-  created_time  DateTime?   @default(dbgenerated("'1971-01-01 00:00:00'")) @db.Timestamp(0)
-  cspro_roles   cspro_roles @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "role_id_constraint")
-
-  @@index([role], map: "role")
-}
-
 model interview_result {
   interview_result_id Int      @id @default(autoincrement()) @map("interview_result-id") @db.UnsignedInt
   level_1_id          Int      @map("level-1-id") @db.UnsignedInt
@@ -184,48 +58,42 @@ model interview_result {
   hh_day              Decimal? @db.Decimal(2, 0)
   hh_month            Decimal? @db.Decimal(2, 0)
   hh_year             Decimal? @db.Decimal(4, 0)
-  level_1             level_1  @relation(fields: [level_1_id], references: [level_1_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_7393CD64172D9CD4")
 
   @@index([level_1_id], map: "IDX_7393CD64172D9CD4")
 }
 
 model level_1 {
-  level_1_id        Int                 @id @default(autoincrement()) @map("level-1-id") @db.UnsignedInt
-  case_id           String              @unique(map: "UNIQ_C3101DC94CD6BAE6", length: 191) @map("case-id") @db.LongText
-  hh_province       Decimal?            @db.Decimal(2, 0)
-  hh_district       Decimal?            @db.Decimal(2, 0)
-  hh_llg            Decimal?            @db.Decimal(2, 0)
-  hh_ward           Decimal?            @db.Decimal(2, 0)
-  hh_cu             Decimal?            @db.Decimal(3, 0)
-  hh_ea             Decimal?            @db.Decimal(2, 0)
-  hh_wl             Decimal?            @db.Decimal(1, 0)
-  hh_number         Decimal?            @db.Decimal(3, 0)
-  interview_result  interview_result[]
-  listing_record    listing_record[]
-  metadata_record   metadata_record[]
-  npd_en            npd_en[]
-  npd_information   npd_information[]
-  population_record population_record[]
+  level_1_id Int      @id @default(autoincrement()) @map("level-1-id") @db.UnsignedInt
+  case_id    String   @unique(map: "UNIQ_C3101DC94CD6BAE6", length: 191) @map("case-id") @db.LongText
+  s_province Decimal? @db.Decimal(2, 0)
+  s_district Decimal? @db.Decimal(2, 0)
+  s_llg      Decimal? @db.Decimal(2, 0)
+  s_ward     Decimal? @db.Decimal(2, 0)
+  s_cu       Decimal? @db.Decimal(3, 0)
+  s_wl       Decimal? @db.Decimal(1, 0)
+  s_record   Decimal? @db.Decimal(3, 0)
 
   @@map("level-1")
 }
 
 model listing_record {
-  listing_record_id  Int      @id @default(autoincrement()) @map("listing_record-id") @db.UnsignedInt
-  level_1_id         Int      @map("level-1-id") @db.UnsignedInt
-  cu_type            Decimal? @db.Decimal(2, 0)
-  vill_name          String?  @db.LongText
-  councilor          String?  @db.LongText
-  locality           String?  @db.LongText
-  portion            Decimal? @db.Decimal(4, 0)
-  lot                Decimal? @db.Decimal(2, 0)
-  structure_rec_num  Decimal? @db.Decimal(3, 0)
-  feature            Decimal? @db.Decimal(2, 0)
-  house_type         Decimal? @db.Decimal(2, 0)
-  pd_npd_no          Decimal? @db.Decimal(3, 0)
-  hh_no              Decimal? @db.Decimal(3, 0)
-  further_id_hh_head String?  @db.LongText
-  level_1            level_1  @relation(fields: [level_1_id], references: [level_1_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_7FCCBE42172D9CD4")
+  listing_record_id       Int      @id @default(autoincrement()) @map("listing_record-id") @db.UnsignedInt
+  level_1_id              Int      @map("level-1-id") @db.UnsignedInt
+  sl_cu_type              Decimal? @db.Decimal(2, 0)
+  sl_vill_name            String?  @db.LongText
+  sl_councilor            String?  @db.LongText
+  col1_locality           String?  @db.LongText
+  col2_portion            Decimal? @db.Decimal(4, 0)
+  col3_lot                Decimal? @db.Decimal(4, 0)
+  col4_structure_rec_num  Decimal? @db.Decimal(4, 0)
+  col5_feature            Decimal? @db.Decimal(2, 0)
+  col6_house_type         Decimal? @db.Decimal(2, 0)
+  col7_pd_npd_no          Decimal? @db.Decimal(3, 0)
+  col8_hh_no              Decimal? @db.Decimal(3, 0)
+  col9_further_id_hh_head String?  @db.LongText
+  col10_totpers           Decimal? @db.Decimal(4, 0)
+  col10_males             Decimal? @db.Decimal(2, 0)
+  col10_females           Decimal? @db.Decimal(2, 0)
 
   @@index([level_1_id], map: "IDX_7FCCBE42172D9CD4")
 }
@@ -233,19 +101,33 @@ model listing_record {
 model metadata_record {
   metadata_record_id        Int      @id @default(autoincrement()) @map("metadata_record-id") @db.UnsignedInt
   level_1_id                Int      @map("level-1-id") @db.UnsignedInt
-  hh_interviewer_code       String?  @db.LongText
-  hh_supervisor_code        String?  @db.LongText
-  hh_start_interview_time   Decimal? @db.Decimal(10, 0)
-  hh_end_interview_time     Decimal? @db.Decimal(10, 0)
-  hh_program_publish_date   Decimal? @db.Decimal(14, 0)
-  hh_house_type             Decimal? @db.Decimal(2, 0)
-  hh_gps_reading            Decimal? @db.Decimal(1, 0)
-  hh_gps_latitude           Decimal? @db.Decimal(10, 6)
-  hh_gps_longitude          Decimal? @db.Decimal(11, 6)
-  hh_gps_altitude           Decimal? @db.Decimal(7, 1)
-  hh_gps_accuracy           Decimal? @db.Decimal(6, 1)
-  hh_gps_satellites         Decimal? @db.Decimal(3, 0)
-  hh_gps_readtime           Decimal? @db.Decimal(6, 0)
+  s_interviewer_code        String?  @db.LongText
+  s_supervisor_code         String?  @db.LongText
+  s_start_interview_time    Decimal? @db.Decimal(10, 0)
+  s_end_interview_time      Decimal? @db.Decimal(10, 0)
+  s_program_publish_date    Decimal? @db.Decimal(14, 0)
+  s_house_type              Decimal? @db.Decimal(2, 0)
+  s_gps_reading             Decimal? @db.Decimal(1, 0)
+  s_gps2_reading            Decimal? @db.Decimal(1, 0)
+  s_gps3_reading            Decimal? @db.Decimal(1, 0)
+  s_gps_latitude            Decimal? @db.Decimal(10, 6)
+  s_gps_longitude           Decimal? @db.Decimal(11, 6)
+  s_gps_altitude            Decimal? @db.Decimal(7, 1)
+  s_gps_accuracy            Decimal? @db.Decimal(6, 1)
+  s_gps_satellites          Decimal? @db.Decimal(3, 0)
+  s_gps_readtime            Decimal? @db.Decimal(6, 0)
+  s_gps2_latitude           Decimal? @db.Decimal(10, 6)
+  s_gps2_longitude          Decimal? @db.Decimal(11, 6)
+  s_gps2_altitude           Decimal? @db.Decimal(7, 1)
+  s_gps2_accuracy           Decimal? @db.Decimal(6, 1)
+  s_gps2_satellites         Decimal? @db.Decimal(3, 0)
+  s_gps2_readtime           Decimal? @db.Decimal(6, 0)
+  s_gps3_latitude           Decimal? @db.Decimal(10, 6)
+  s_gps3_longitude          Decimal? @db.Decimal(11, 6)
+  s_gps3_altitude           Decimal? @db.Decimal(7, 1)
+  s_gps3_accuracy           Decimal? @db.Decimal(6, 1)
+  s_gps3_satellites         Decimal? @db.Decimal(3, 0)
+  s_gps3_readtime           Decimal? @db.Decimal(6, 0)
   sl_introduction           Decimal? @db.Decimal(1, 0)
   npdef_data_capture_method Decimal? @db.Decimal(1, 0)
   npdef_instruction         Decimal? @db.Decimal(1, 0)
@@ -258,12 +140,11 @@ model metadata_record {
   hh_conclusion_section     Decimal? @db.Decimal(1, 0)
   intvw_result_control      Decimal? @db.Decimal(1, 0)
   hh_conclusion             Decimal? @db.Decimal(1, 0)
-  level_1                   level_1  @relation(fields: [level_1_id], references: [level_1_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_386AFC5D172D9CD4")
 
   @@index([level_1_id], map: "IDX_386AFC5D172D9CD4")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model notes {
   case_id            String    @db.LongText
   field_name         String    @db.LongText
@@ -284,75 +165,19 @@ model npd_en {
   level_1_id   Int     @map("level-1-id") @db.UnsignedInt
   occ          Int     @default(1) @db.UnsignedInt
   npde_ref_num String? @db.LongText
-  level_1      level_1 @relation(fields: [level_1_id], references: [level_1_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_1BCAF522172D9CD4")
 
   @@index([level_1_id], map: "IDX_1BCAF522172D9CD4")
 }
 
 model npd_information {
-  npd_information_id        Int      @id @default(autoincrement()) @map("npd_information-id") @db.UnsignedInt
-  level_1_id                Int      @map("level-1-id") @db.UnsignedInt
-  npdif_data_capture_method Decimal? @db.Decimal(1, 0)
-  npdif_instruction         Decimal? @db.Decimal(1, 0)
-  npdif_ref_no              String?  @db.LongText
-  level_1                   level_1  @relation(fields: [level_1_id], references: [level_1_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_50AA31EE172D9CD4")
+  npd_information_id          Int      @id @default(autoincrement()) @map("npd_information-id") @db.UnsignedInt
+  level_1_id                  Int      @map("level-1-id") @db.UnsignedInt
+  npdif_data_capture_method   Decimal? @db.Decimal(1, 0)
+  npdif_instruction           Decimal? @db.Decimal(1, 0)
+  npdif_ref_no                String?  @db.LongText
+  npd_information_form_status Decimal? @db.Decimal(1, 0)
 
   @@index([level_1_id], map: "IDX_50AA31EE172D9CD4")
-}
-
-model oauth_access_tokens {
-  access_token String   @id @db.VarChar(40)
-  client_id    String   @db.VarChar(80)
-  user_id      String?  @db.VarChar(255)
-  expires      DateTime @default(now()) @db.Timestamp(0)
-  scope        String?  @db.VarChar(2000)
-}
-
-model oauth_authorization_codes {
-  authorization_code String   @id @db.VarChar(40)
-  client_id          String   @db.VarChar(80)
-  user_id            String?  @db.VarChar(255)
-  redirect_uri       String?  @db.VarChar(2000)
-  expires            DateTime @default(now()) @db.Timestamp(0)
-  scope              String?  @db.VarChar(2000)
-}
-
-model oauth_clients {
-  client_id     String  @id @db.VarChar(80)
-  client_secret String? @db.VarChar(80)
-  redirect_uri  String  @db.VarChar(2000)
-  grant_types   String? @db.VarChar(80)
-  scope         String? @db.VarChar(100)
-  user_id       String? @db.VarChar(80)
-}
-
-model oauth_jwt {
-  client_id  String  @id @db.VarChar(80)
-  subject    String? @db.VarChar(80)
-  public_key String? @db.VarChar(2000)
-}
-
-model oauth_refresh_tokens {
-  refresh_token String   @id @db.VarChar(40)
-  client_id     String   @db.VarChar(80)
-  user_id       String?  @db.VarChar(255)
-  expires       DateTime @default(now()) @db.Timestamp(0)
-  scope         String?  @db.VarChar(2000)
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model oauth_scopes {
-  scope      String?  @db.Text
-  is_default Boolean?
-
-  @@ignore
-}
-
-model oauth_users {
-  username   String  @id @db.VarChar(128)
-  password   String? @db.VarChar(2000)
-  first_name String? @db.VarChar(255)
-  last_name  String? @db.VarChar(255)
 }
 
 model population_record {
@@ -360,25 +185,18 @@ model population_record {
   level_1_id           Int      @map("level-1-id") @db.UnsignedInt
   occ                  Int      @default(1) @db.UnsignedInt
   hh_keep_row          Decimal? @db.Decimal(1, 0)
-  hh_name              String?  @db.LongText
-  hh_relationship      Decimal? @db.Decimal(2, 0)
-  hh_sex               Decimal? @db.Decimal(1, 0)
-  hh_date_of_birth     Decimal? @db.Decimal(8, 0)
-  hh_date_born         Decimal? @db.Decimal(2, 0)
-  hh_month_born        Decimal? @db.Decimal(2, 0)
-  hh_year_born         Decimal? @db.Decimal(4, 0)
-  hh_age               Decimal? @db.Decimal(2, 0)
-  hh_marital_status    Decimal? @db.Decimal(1, 0)
-  hh_citizenship       Decimal? @db.Decimal(1, 0)
-  hh_non_citizen       Decimal? @db.Decimal(3, 0)
+  co1_name             String?  @db.LongText
+  co2_relationship     Decimal? @db.Decimal(2, 0)
+  co3_sex              Decimal? @db.Decimal(1, 0)
+  co4_date_of_birth    Decimal? @db.Decimal(8, 0)
+  co4_date_born        Decimal? @db.Decimal(2, 0)
+  co4_month_born       Decimal? @db.Decimal(2, 0)
+  co4_year_born        Decimal? @db.Decimal(4, 0)
+  co4_age              Decimal? @db.Decimal(2, 0)
+  co5_marital_status   Decimal? @db.Decimal(1, 0)
+  co6_citizenship      Decimal? @db.Decimal(1, 0)
+  co6_non_citizen      Decimal? @db.Decimal(3, 0)
   hh_more_rows         Decimal? @db.Decimal(1, 0)
-  level_1              level_1  @relation(fields: [level_1_id], references: [level_1_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_8F07C46E172D9CD4")
 
   @@index([level_1_id], map: "IDX_8F07C46E172D9CD4")
-}
-
-enum cspro_sync_history_direction {
-  put
-  get
-  both
 }

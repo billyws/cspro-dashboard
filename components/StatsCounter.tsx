@@ -1,13 +1,29 @@
+'use client'
+
+import { useState, useEffect } from "react"
+
+
 export default function StatsCounter(){
+
+    const [stats, setStats] = useState([])
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(data => setStats(data))
+    },[])
+
     return (
         <div>
             <div className="grid grid-cols-4 gap-4 mb-2">
                 <div className="p-5 bg-slate-50 rounded">
                     <div className="flex flex-col-2 justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-950">25,332</h1>
-                            <h4 className="text-normal text-gray-600">Household Coverage</h4>
-                            <span className="text-xs text-green-600">up by 5%</span>
+                            <div>
+                                <h1 className="text-3xl font-bold text-gray-950">{stats.length}</h1>
+                                <h4 className="text-normal text-gray-600">Household Coverage</h4>
+                                <span className="text-xs text-green-600">up on {Date.now()}</span>
+                            </div>
                         </div>
                         <div>
                             <svg 
@@ -26,8 +42,9 @@ export default function StatsCounter(){
                         </div>
                     </div>
                 </div>
+
                 <div className="p-5 bg-slate-50 rounded">
-                <div className="flex flex-col-2 justify-between">
+                    <div className="flex flex-col-2 justify-between">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-950">5,332</h1>
                             <h4 className="text-normal text-gray-600">CU Coverage</h4>
