@@ -15,9 +15,9 @@ import { PrismaClient } from "@prisma/client"
 // 3. Pass the data as props to children.
 
 
-export async function Home() {
+export default function Home() {
 
-  const prisma = new PrismaClient()
+  //const prisma = new PrismaClient()
   
   // Get cases from db
 
