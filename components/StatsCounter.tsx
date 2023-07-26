@@ -13,6 +13,15 @@ export default function StatsCounter(){
             .then(data => setStats(data))
     },[])
 
+    // Format date
+    const date = new Date()
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+
+    const year = date.getFullYear()
+    const formattedDate = `${day}/${month}/${year}`
+
+
     return (
         <div>
             <div className="grid grid-cols-4 gap-4 mb-2">
@@ -22,7 +31,7 @@ export default function StatsCounter(){
                             <div>
                                 <h1 className="text-3xl font-bold text-gray-950">{stats.length * 3.52}</h1>
                                 <h4 className="text-normal text-gray-600">Household Coverage</h4>
-                                <span className="text-xs text-green-600">up on {Date.now()}</span>
+                                <span className="text-xs text-green-600">up on: {formattedDate}</span>
                             </div>
                         </div>
                         <div>
