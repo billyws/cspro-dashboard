@@ -1,7 +1,6 @@
 'use client'
 
 import { useState,useEffect } from "react"
-import Interviews from "../app/interviews/page"
 
 
 export default function StatsCounter(){
@@ -22,6 +21,7 @@ export default function StatsCounter(){
         let malesSum = 0;
         let femalesSum = 0;
     
+        // Replace null values with 0 and add all the values
         data.forEach((record) => {
             let persons = record.col10_totpers !== null && !isNaN(record.col10_totpers) ? Number(record.col10_totpers) : 0;
             let males = record.col10_males !== null && !isNaN(record.col10_males) ? Number(record.col10_males) : 0;
