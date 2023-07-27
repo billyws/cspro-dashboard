@@ -1,18 +1,7 @@
 
-import Image from "next/image"
-import Link from "next/link"
 import StatsCounter from "../components/StatsCounter"
 import SummaryTable from "../components/SummaryTable"
 import DailyProgress from "../components/DailyProgress"
-import TopNav from "../components/TopNav"
-import { PrismaClient } from "@prisma/client"
-
-
-
-// Todo 
-// 1. Create a connection to the database to retrieve administrative indicators
-// 2. Population the page with the data and store in a state.
-// 3. Pass the data as props to children.
 
 
 export default function Home() {

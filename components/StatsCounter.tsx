@@ -3,24 +3,19 @@
 import { useState,useEffect } from "react"
 import { PrismaClient } from "@prisma/client"
 
-export default async function StatsCounter(){
-    
-    const prisma =  new PrismaClient()
 
+export default function StatsCounter(){
+    
     const [stats, setStats] = useState([])
-    const [interviews, setInterviews] = useState([])
 
-    // Use the useEffect hook to get data with the prisma client
+    // Use the useEffect hook to get data from pages/api/stats
     useEffect(() => {
-        prisma.level_1.findMany()
-            .then(response => setStats(response))
-        
-        prisma.population_record.findMany()
-            .then(response => setInterviews(response))
+        fetch('/api/stats')
+            .then(response => response.json())
+            .then(data => setStats(data))
     }, [])
-
-    console.log(stats)
     
+
 
     // Format date
     const date = new Date()
