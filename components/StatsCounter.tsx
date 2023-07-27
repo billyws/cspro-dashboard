@@ -1,19 +1,54 @@
 'use client'
 
 import { useState,useEffect } from "react"
-import { PrismaClient } from "@prisma/client"
+import Interviews from "../app/interviews/page"
 
 
 export default function StatsCounter(){
     
-    const [stats, setStats] = useState([])
+    const [interviews, setInterviews] = useState([])
+    const [persons, setPersons] = useState([])
+    const [males, setMales] = useState([])
+    const [females, setFemales] = useState([])
 
-    // Use the useEffect hook to get data from pages/api/stats
+    // Use the useEffect hook to get data from pages/api/interviews
+    // and set the state of the interviews, persons, males, and females variables respectively
+    async function getInterviewsData() {
+        const response = await fetch('/api/interviews');
+        const data = await response.json();
+    
+        // Initializing sums for persons, males, and females
+        let personsSum = 0;
+        let malesSum = 0;
+        let femalesSum = 0;
+    
+        data.forEach((record) => {
+            let persons = record.col10_totpers !== null && !isNaN(record.col10_totpers) ? Number(record.col10_totpers) : 0;
+            let males = record.col10_males !== null && !isNaN(record.col10_males) ? Number(record.col10_males) : 0;
+            let females = record.col10_females !== null && !isNaN(record.col10_females) ? Number(record.col10_females) : 0;
+    
+            personsSum += persons;
+            malesSum += males;
+            femalesSum += females;
+        });
+    
+        setInterviews(data);
+        setPersons(personsSum);
+        setMales(malesSum);
+        setFemales(femalesSum);
+    }
+    
     useEffect(() => {
-        fetch('/api/stats')
+        getInterviewsData()
+    }, []);
+    
+    
+
+    /* useEffect(() => {
+        fetch('/api/interviews')
             .then(response => response.json())
-            .then(data => setStats(data))
-    }, [])
+            .then(data => setInterviews(data))
+    }, []) */
     
 
 
@@ -33,8 +68,8 @@ export default function StatsCounter(){
                     <div className="flex flex-col-2 justify-between">
                         <div>
                             <div>
-                                <h1 className="text-3xl font-bold text-gray-950">{stats.length}</h1>
-                                <h4 className="text-normal text-gray-600">Household Coverage</h4>
+                                <h1 className="text-3xl font-bold text-gray-950">{interviews.length}</h1>
+                                <h4 className="text-normal text-gray-600">Total interviews</h4>
                                 <span className="text-xs text-green-600">up on: {formattedDate}</span>
                             </div>
                         </div>
@@ -59,8 +94,8 @@ export default function StatsCounter(){
                 <div className="p-5 bg-slate-50 rounded">
                     <div className="flex flex-col-2 justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-950">5,332</h1>
-                            <h4 className="text-normal text-gray-600">CU Coverage</h4>
+                            <h1 className="text-3xl font-bold text-gray-950">{persons}</h1>
+                            <h4 className="text-normal text-gray-600">Total Persons</h4>
                             <span className="text-xs text-green-600">up by 5%</span>
                         </div>
                         <div>
@@ -88,8 +123,8 @@ export default function StatsCounter(){
                 <div className="p-5 bg-slate-50 rounded">
                 <div className="flex flex-col-2 justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-950">36,332</h1>
-                            <h4 className="text-normal text-gray-600">Response rate</h4>
+                            <h1 className="text-3xl font-bold text-gray-950">{males}</h1>
+                            <h4 className="text-normal text-gray-600">Males</h4>
                             <span className="text-xs text-red-600">down by 5%</span>
                         </div>
                         <div>
@@ -113,8 +148,8 @@ export default function StatsCounter(){
                 <div className="p-5 bg-slate-50 rounded">
                 <div className="flex flex-col-2 justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-950">532</h1>
-                            <h4 className="text-normal text-gray-600">Error rates</h4>
+                            <h1 className="text-3xl font-bold text-gray-950">{females}</h1>
+                            <h4 className="text-normal text-gray-600">Females</h4>
                             <span className="text-xs text-red-600">up by 23%</span>
                         </div>
                         <div>
