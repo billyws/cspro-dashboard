@@ -16,12 +16,6 @@ import { PrismaClient } from "@prisma/client"
 
 
 export default function Home() {
-
-  //const prisma = new PrismaClient()
-  
-  // Get cases from db
-
-
   return (
     <div>
         <div className="flex flex-row pt-10 justify-between">
@@ -33,13 +27,11 @@ export default function Home() {
             </p>
             </div>
         </div>
-
       <div className="nsodivider"></div>
       <StatsCounter />
       <DailyProgress/>
       <SummaryTable />
 
   </div>
-
   )
 }

@@ -1,17 +1,26 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState,useEffect } from "react"
+import { PrismaClient } from "@prisma/client"
 
-
-export default function StatsCounter(){
+export default async function StatsCounter(){
+    
+    const prisma =  new PrismaClient()
 
     const [stats, setStats] = useState([])
+    const [interviews, setInterviews] = useState([])
 
+    // Use the useEffect hook to get data with the prisma client
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-            .then(response => response.json())
-            .then(data => setStats(data))
-    },[])
+        prisma.level_1.findMany()
+            .then(response => setStats(response))
+        
+        prisma.population_record.findMany()
+            .then(response => setInterviews(response))
+    }, [])
+
+    console.log(stats)
+    
 
     // Format date
     const date = new Date()
@@ -29,7 +38,7 @@ export default function StatsCounter(){
                     <div className="flex flex-col-2 justify-between">
                         <div>
                             <div>
-                                <h1 className="text-3xl font-bold text-gray-950">{stats.length * 3.52}</h1>
+                                <h1 className="text-3xl font-bold text-gray-950">{stats.length}</h1>
                                 <h4 className="text-normal text-gray-600">Household Coverage</h4>
                                 <span className="text-xs text-green-600">up on: {formattedDate}</span>
                             </div>
