@@ -7,9 +7,9 @@ import Interviews from "../app/interviews/page"
 export default function StatsCounter(){
     
     const [interviews, setInterviews] = useState([])
-    const [persons, setPersons] = useState([])
-    const [males, setMales] = useState([])
-    const [females, setFemales] = useState([])
+    const [persons, setPersons] = useState(0)
+    const [males, setMales] = useState(0)
+    const [females, setFemales] = useState(0)
 
     // Use the useEffect hook to get data from pages/api/interviews
     // and set the state of the interviews, persons, males, and females variables respectively
