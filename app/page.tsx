@@ -18,7 +18,7 @@ export default function Home() {
                     Any reliance is at your own risk.
                 </p>
               </div>
-              <div className="flex flex-col w-full justify-end">
+              <div className="flex flex-col col-span-1 justify-end">
                   <DateFilter/>
               </div>
             </div>
