@@ -4,12 +4,19 @@ import { useState, useEffect } from 'react'
 
 export default function DailyProgress(){
     const [npd, setNpd] = useState([])
+    const [assignmentsData, setAssignmentsData] = useState([])
 
     async function getNpdData(){
 
         const response = await fetch("/api/ndp")
         const data = await response.json()
         
+        // TODO: Destructure Assignments and Total Count from the API
+        // TODO: Set the states and create metrics for performance
+
+        // ! Display results first, before attempt
+        // ! And don't forget to handle errors here
+
         setNpd(data)
 
     }
