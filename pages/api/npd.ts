@@ -2,8 +2,6 @@
 // TODO: Fetch data from API Swagger
 // TODO: API server has authorization
 
-import { headers } from "next/dist/client/components/headers"
-
 export default async function handler(req, res){
 
         const username = process.env.SURSOL_API_USERNAME
@@ -11,11 +9,11 @@ export default async function handler(req, res){
         const workspace = process.env.SURSOL_API_WORKSPACE
     
 
-    const encodedCredentials = Buffer.from(`${username}:${password}:${workspace}`).toString('base64');
+    const encodedCredentials = Buffer.from(`${username}:${password}`).toString('base64');
     
     // TODO: Check if authorization from the REQUEST is successful
-    try {
-        const data = await fetch(`${process.env.SURSOL_API_URL}/assignments`, {
+    
+        const data = await fetch(`http://45.63.29.103/npd/api/v1/assignments`, {
             method:'GET',
             headers: {
                 'Authorization': `Basic ${encodedCredentials}`,
@@ -24,15 +22,6 @@ export default async function handler(req, res){
                 'Access-Control-Allow-Origin': '*'
             }
         })
-        const response = res.status(200).json(data);
-        return response
-
-        if(!data.ok) {
-            throw new Error (`An error occurred: ${res.status} ${res.statusText}`)
-        }
-    } catch (error) {
-        return null
+        const response = await data.json()
+        const npdData = res.status(200).json(response);
     }
-
-
-}
