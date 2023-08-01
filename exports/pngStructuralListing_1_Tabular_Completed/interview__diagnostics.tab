@@ -1,0 +1,5 @@
+﻿interview__key	interview__id	interview__status	responsible	interviewers	rejections__sup	rejections__hq	entities__errors	questions__comments	interview__duration	n_questions_unanswered
+77-81-02-64	0028ff1866b04094b517f13b84fcaa5f	100	pilotInt33	1	0	0	0	0	00.00:36:50	0
+98-39-11-05	17b57d23a0ab4957939f2995daa1cca0	100	pilotInt32	1	0	0	0	0	00.00:07:49	0
+57-46-57-29	75d8bcdbcb524fa4b48e59b7ecb42d98	100	pilotInt35	1	0	0	0	0	00.00:16:43	1
+74-34-88-96	a3c9c911e4904dffa3e0c549cb70f9d5	100	pilotInt34	1	0	0	0	0	00.01:12:11	1

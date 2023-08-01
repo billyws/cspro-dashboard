@@ -1,19 +1,11 @@
 
-// TODO: Fetch data from API Swagger
-// TODO: API server has authorization
+import getAuth from "../../utils/auth"
 
 export default async function handler(req, res){
 
-        const username = process.env.SURSOL_API_USERNAME
-        const password = process.env.SURSOL_API_PASSWORD
-        const workspace = process.env.SURSOL_API_WORKSPACE
+    const { url, encodedCredentials } = getAuth()
     
-
-    const encodedCredentials = Buffer.from(`${username}:${password}`).toString('base64');
-    
-    // TODO: Check if authorization from the REQUEST is successful
-    
-        const data = await fetch(`http://45.63.29.103/npd/api/v1/assignments`, {
+        const data = await fetch(`${url}/assignments`, {
             method:'GET',
             headers: {
                 'Authorization': `Basic ${encodedCredentials}`,

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<codeBook version="1.2.2" ID="QIDANDREV" xml-lang="en" xmlns="http://www.icpsr.umich.edu/DDI" xsi:SchemaLocation="http://www.icpsr.umich.edu/DDI http://www.icpsr.umich.edu/DDI/Version1-2-2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <docDscr>
+    <citation>
+      <titlStmt>
+        <titl>PNG Population and Housing Census 2024 Structural Listing</titl>
+      </titlStmt>
+      <prodStmt>
+        <copyright>
+        </copyright>
+        <software version="1.0.0" date="2015-07-08">StatDDI</software>
+      </prodStmt>
+    </citation>
+    <notes>
+    </notes>
+  </docDscr>
+  <stdyDscr>
+    <citation>
+      <titlStmt>
+        <titl>PNG Population and Housing Census 2024 Structural Listing</titl>
+        <IDNO>QUEST</IDNO>
+      </titlStmt>
+      <prodStmt>
+        <software version="1.0.0" date="2015-07-08">StatDDI</software>
+      </prodStmt>
+    </citation>
+  </stdyDscr>
+  <dataDscr>
+    <var ID="V1" name="interview__id" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[Unique 32-character long identifier of the interview]]></labl>
+      <qstn />
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V2" name="interview__key" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[Interview key (identifier in XX-XX-XX-XX format)]]></labl>
+      <qstn />
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V3" name="assignment__id" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[Assignment id (identifier in numeric format)]]></labl>
+      <qstn />
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V4" name="sssys_irnd" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[Random number in the range 0..1 associated with interview]]></labl>
+      <qstn />
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V5" name="has__errors" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[Errors count in the interview]]></labl>
+      <qstn />
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V6" name="interview__status" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[Status of the interview]]></labl>
+      <qstn />
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V7" name="referenceCode" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[reference_code]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[*️⃣ What is the Reference Code on the form?]]></qstnLit>
+        <ivuInstr><![CDATA[Note that every form has a unique reference code. The reference code will follow this pattern NIF######. The NIF has been entered for you please  enter the last six digits to bring out the npd information form for data transcribing.]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V8" name="pictNIF" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[picture_NIF]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[1*. Taka the picture of the form with reference code (%referenceCode%)  you have entered...]]></qstnLit>
+        <ivuInstr><![CDATA[Please capture the full clear image of the form....]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V9" name="npd_address" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[npd_address]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[2*. Address:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the adress on the npd form? Type it below......]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V10" name="location" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[location]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[3*. Location:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the location on the npd form? Type it below..........]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V11" name="section" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[section]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[4*. Section:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the section on the npd form? Type it below..........]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V12" name="lot" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[lot]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[5. Lot:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the lot number on the npd form? Enter below..........]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V13" name="ownerName" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[ownerName]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[6*. Name of NPD owner:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the Name of NPD owner on the npd form? Type it below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V14" name="contact_person" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[contact_person]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[7*. Contact Person's Details
+
+ 
+(a). Name of Person(s) to contact:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the name of person to contact on the npd form? Type it below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V15" name="person_title" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[contact person title]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(b) Person's title]]></qstnLit>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V16" name="contact_num" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[contact_num]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(c). Phone number:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the contact person's phone number on the npd form? Enter below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V17" name="contact_email" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[contact_email]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(d). Email address (if any):]]></qstnLit>
+        <ivuInstr><![CDATA[What is the contact person's email on the npd form? Type it below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V18" name="contact_facsimile" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[contact_facsimile]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(e). Facsimile number (if any)]]></qstnLit>
+        <ivuInstr><![CDATA[What is the contact person's facsimile number on the npd form? Enter below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V19" name="cooking_arragement" files="F1" intrvl="discrete">
+      <location width="255" RecSegNo="1" />
+      <labl><![CDATA[cooking_arragement]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[8*. Cooking Arrangement
+
+
+Describe cooking arrangement]]></qstnLit>
+        <ivuInstr><![CDATA[Please copy details on cooking arrangement for this npd form.]]></ivuInstr>
+      </qstn>
+      <varFormat type="character" schema="other" />
+    </var>
+    <var ID="V20" name="totalBlocks" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[total_blocks]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[9*. Sleeping Arrangement
+
+
+(a) Total number of blocks]]></qstnLit>
+        <ivuInstr><![CDATA[What is the total number of blocks on this npd form? Enter below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V21" name="totalRooms" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[total_rooms]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(b) Total number of rooms / cubicules]]></qstnLit>
+        <ivuInstr><![CDATA[What is the total number of rooms/cubicles on this npd form? Enter below..............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V22" name="personPerRooms" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[person_per_rooms]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(C) Average number of persons per room/ cubicle:]]></qstnLit>
+        <ivuInstr><![CDATA[What is the average number of persons per room/ cubicle on this npd form? Enter below.............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V23" name="totalBeds" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[total_Beds]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(d) Total number of beds]]></qstnLit>
+        <ivuInstr><![CDATA[What is the total number of beds on this npd form? Enter below.............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+    <var ID="V24" name="totalPerson" files="F1" intrvl="contin">
+      <location RecSegNo="1" />
+      <labl><![CDATA[totalPerson]]></labl>
+      <qstn>
+        <qstnLit><![CDATA[(e) Approximate number of total person]]></qstnLit>
+        <ivuInstr><![CDATA[What is the approximate number of total person on this npd form? Enter below.............]]></ivuInstr>
+      </qstn>
+      <varFormat type="numeric" schema="other" />
+    </var>
+  </dataDscr>
+  <fileDscr ID="F1" URI="Temp#33.~esstar?Index=0&amp;Name=pngStructuralListing">
+    <fileTxt>
+      <fileName>pngStructuralListing.NSDstat</fileName>
+      <dimensns>
+        <caseQnty>0</caseQnty>
+        <varQnty>24</varQnty>
+      </dimensns>
+      <fileType>Nesstar 200801</fileType>
+    </fileTxt>
+  </fileDscr>
+</codeBook>
