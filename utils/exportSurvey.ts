@@ -5,7 +5,7 @@ import fs from 'fs';
 import getAuth from './auth';
 
 // Function to export data
-async function exportData(url, path) {
+async function exportSurvey(url) {
     
     // Get credentials
     const { encodedCredentials } = getAuth();
@@ -24,6 +24,8 @@ async function exportData(url, path) {
       "ExportType": "Tabular",
       "QuestionnaireId": "string",
       "InterviewStatus": "All",
+      "From": "2023-08-01T18:02:48.114Z",
+      "To": "2023-08-01T18:02:48.114Z",
       "AccessToken": "string",
       "RefreshToken": "string",
       "StorageType": "Dropbox",
@@ -36,8 +38,7 @@ async function exportData(url, path) {
     // Check if response is successful
     if (response.status === 200) {
         // Write data to file
-      fs.writeFileSync(path, JSON.stringify(response.data, null, 2));
-      console.log(`Data exported to ${path}`);
+      console.log(`Data exported successfully. Status code: ${response.status}`);
     } else {
       console.log(`Failed to export data. Status code: ${response.status}`);
     }
@@ -46,5 +47,5 @@ async function exportData(url, path) {
   }
 }
 
-export default exportData;
+export default exportSurvey;
 
