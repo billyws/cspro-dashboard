@@ -19,7 +19,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col col-span-1 justify-end">
-                  <DateFilter/>
+                  
               </div>
             </div>
         </div>
