@@ -1,9 +1,7 @@
 
 import StatsCounter from "../components/StatsCounter"
-import SummaryTable from "../components/SummaryTable"
 import DailyProgress from "../components/DailyProgress"
-import DateFilter from "../components/DateFilter"
-import ProvinceFilter from "../components/ProvinceFilter"
+import SummaryMap from "../components/SummaryMap"
 
 
 export default function Home() {
@@ -25,8 +23,8 @@ export default function Home() {
         </div>
       <div className="nsodivider"></div>
       <StatsCounter />
+      <SummaryMap />
       <DailyProgress/>
-      <SummaryTable />
 
   </div>
   )

@@ -62,7 +62,7 @@ export default function StatsCounter(){
 
     return (
         <div>
-            <div className="grid grid-cols-4 gap-4 mb-2">
+            <div className="grid grid-cols-4 gap-4 mb-5">
                 <div className="p-5 bg-slate-50 rounded">
                     <div className="flex flex-col-2 justify-between">
                         <div>
