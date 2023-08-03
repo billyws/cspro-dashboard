@@ -14,7 +14,6 @@ export default async function handler(req, res) {
 }
 
 
-// Path: cspro-dashboard/pages/api/interviews/[id].ts
 
 // Sample output
 /* {

@@ -1,8 +1,12 @@
 
 import StatsCounter from "../components/StatsCounter"
 import DailyProgress from "../components/DailyProgress"
-import SummaryMap from "../components/SummaryMap"
+import SyncActivites from "../components/SyncActivities"
+import dynamic from "next/dynamic"
 
+const DynamicMap = dynamic(() => import("../components/SummaryMap"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -23,7 +27,10 @@ export default function Home() {
         </div>
       <div className="nsodivider"></div>
       <StatsCounter />
-      <SummaryMap />
+      <div className="grid grid-cols-4 gap-4 mb-5">
+        <DynamicMap />
+        <SyncActivites />
+      </div>
       <DailyProgress/>
 
   </div>

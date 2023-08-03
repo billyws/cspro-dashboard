@@ -15,8 +15,6 @@ export default function DailyProgress(){
             }
             const data = await response.json()
 
-            console.log('Received data:', data)  // Log the data to see what you're receiving
-
             // TODO: Destructure Assignments and Total Count from the API
             // TODO: Set the states and create metrics for performance
         
