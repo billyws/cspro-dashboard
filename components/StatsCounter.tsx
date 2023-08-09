@@ -9,7 +9,7 @@ export default function StatsCounter(){
     const [males, setMales] = useState(0)
     const [females, setFemales] = useState(0)
 
-    // Use the useEffect hook to get data from pages/api/interviews
+    // Use the useEffect hook to get data from /api/interviews
     // and set the state of the interviews, persons, males, and females variables respectively
     async function getInterviewsData() {
         const response = await fetch('/api/interviews');
@@ -21,6 +21,9 @@ export default function StatsCounter(){
         let femalesSum = 0;
     
         // Replace null values with 0 and add all the values
+
+        // TODO: Remove NPD counts from the total persons count
+        // TODO: If the records contains NPD, remove it from the total persons count
         data.forEach((record) => {
             let persons = record.col10_totpers !== null && !isNaN(record.col10_totpers) ? Number(record.col10_totpers) : 0;
             let males = record.col10_males !== null && !isNaN(record.col10_males) ? Number(record.col10_males) : 0;
