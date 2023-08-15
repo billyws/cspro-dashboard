@@ -6,7 +6,7 @@ export default function SideNav(){
     return (
         <div className="nsomenu w-80 bg-gray-50 h-screen">
             <div className="pl-10 py-5 bg-amber-400 font-light text-blue-950">
-                Welcome Billy Somers
+                Welcome admin
             </div>
             <div className="flex flex-row pt-2">
                 <ul className="w-full">

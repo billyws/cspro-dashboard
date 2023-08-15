@@ -7,17 +7,23 @@ import 'leaflet/dist/leaflet.css'
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
-export default function SummaryMap(){
-    const [households, setHouseholds] = useState([])
+interface Household {
+    s_gps3_latitude?: number;
+    s_gps3_longitude?: number;
+    s_interviewer_code?: string;
+}
 
-    async function getHouseholdsData(){
+const SummaryMap = () => {
+    const [households, setHouseholds] = useState<Household[]>([])
+
+    async function getHouseholdsData() {
         try {
             const response = await fetch("/api/hhcordinates")
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
-            const data = await response.json()
+            const data = await response.json() as Household[]
             setHouseholds(data)
 
         } catch (error) {
@@ -25,7 +31,7 @@ export default function SummaryMap(){
         }
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getHouseholdsData()
     }, [])
 
@@ -34,7 +40,7 @@ export default function SummaryMap(){
         height: "500px"
     }
 
-    return(
+    return (
         <div className="col-span-3 p-5 bg-slate-50 rounded">
             <MapContainer center={[-6.23333, 150.666664]} zoom={6} style={width} scrollWheelZoom={true} zoomAnimation={true}>
                 <TileLayer
@@ -44,14 +50,16 @@ export default function SummaryMap(){
                 {
                     households.map((household, index) => (
                         household && household.s_gps3_latitude && household.s_gps3_longitude ?
-                        <LocationMarker 
-                            key={index} 
-                            position={[household.s_gps3_latitude, household.s_gps3_longitude]}
-                            interviewerCode={household.s_interviewer_code}
-                        /> : null
+                            <LocationMarker
+                                key={index}
+                                position={[household.s_gps3_latitude, household.s_gps3_longitude]}
+                                interviewerCode={household.s_interviewer_code}
+                            /> : null
                     ))
                 }
-                </MapContainer>  
+            </MapContainer>
         </div>
     )
 }
+
+export default SummaryMap;
