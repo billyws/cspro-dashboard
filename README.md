@@ -5,7 +5,7 @@ The app is not intended to replace CSWeb, but to simplify visualisations and int
 ## Getting Started
 
 ```
-git clone https://github.com/billyws/cspro-dashboard.git
+git clone https://gitlab.com/somersbilly/cspro-dashboard.git
 ```
 
 ```

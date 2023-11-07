@@ -17,9 +17,6 @@ export default function SyncActivites(){
             }
             const data = await response.json()
 
-            // Convert this SQL statement - SELECT * FROM `level-1` WHERE s_province = 5
-            // to a JavaScript statement
-
             const MilneBay = data.filter((syncActivity) => syncActivity.s_province === 5)
             const Morobe = data.filter((syncActivity) => syncActivity.s_province === 12)
 
